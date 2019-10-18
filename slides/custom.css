@@ -1,0 +1,14 @@
+#first-slide-title {
+    color: blue;
+    text-shadow: 5px 5px #ff0000;
+    font-size: 300px;
+    animation-name:  a-from-blue-to-azure;
+    animation-duration: 4s;
+    animation-iteration-count:infinite;
+  }
+
+@keyframes a-from-blue-to-azure {
+0% { color: blue;}
+50% { color: azure;}
+100% { color: blue;}
+}

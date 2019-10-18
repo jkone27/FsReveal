@@ -6,13 +6,72 @@
 - transition : default
 
 ***
+- data-background : ./images/wow-f-sharp.jpg
+- data-background-repeat : repeat
+- data-background-size : 800px
+- body-color : blue
 
-### What is F#
+<h1 id="first-slide-title">F#</h1>
 
-- .NET (and .netcore) functional first programming language. F# derives most of his synthax from OCaml which is a language developed by Inria(FR) 
-- OCAML: Object Categorical Abstract Metalanguage is also derived from CAML, which derives from stanford ML (meta language)
-- ML is one of the oldest implementation of a strongly typed and type inferenced functional programming language
-- other famous "old" functional programming langs like LISP or ERLANG are dynamically typed, we will see this makes quite a huge difference
+slides done with:
+![FsReveal](https://fsprojects.github.io/FsReveal/formatting.html) (F# jsReveal)
+
+' my spearker notes
+
+***
+
+### F# Intro
+
+1. **What** is F# : open source functional first .net language
+2. **Why** learning F# among all functional first languages
+3. **language features** (similarities and differences with other langs)
+4. A simple console application using **FSharp.Data**, what is a type provider?
+
+<aside class="notes">
+my spearker notes
+</aside>
+
+***
+
+### F#
+
+  - **let** - expression bindings (everything is a function)
+  - automatic type inference
+  - higher order functions (functions accepting functions as parameters) - HOF
+  - currying and partial application
+  - lists, arrays, sequences (IEnumerable)
+  - tuples : product types
+  - the **type** keyword (defining custom types)
+  - records (~ super-powered C# poco classes) : product types with names
+  - union types (discriminated union - or sum types)
+  - pattern matching over list, tuples, unions, records and so on
+
+***
+
+### What? (Wikipedia)
+
+* F# (pronounced F sharp) is a general purpose, strongly typed, multi-paradigm programming language that encompasses functional, 
+imperative, and object-oriented programming methods.
+
+<aside class="notes">
+is most often used as a cross-platform Common Language Infrastructure (CLI) language, 
+but it can also generate JavaScript and graphics processing unit (GPU) code.
+
+Is developed by the F# Software Foundation, Microsoft and open contributors. 
+An open source, cross-platform compiler for F# is available from the F# Software Foundation. 
+
+F# is also a fully supported language in Visual Studio and Xamarin Studio. 
+
+Other tools supporting F# development include Mono, MonoDevelop, SharpDevelop, MBrace, and WebSharper.
+
+Plug-ins supporting F# exist for many widely used editors, most notably the Ionide extension for Atom and Visual Studio Code, 
+and integrations for other editors such as Vim, Emacs, Sublime Text, and Rider.
+
+Is a member of the ML language family and originated as a .NET Framework implementation 
+of a core of the programming language OCaml. 
+
+It has also been influenced by C#, Python, Haskell, Scala, and Erlang.
+</aside>
 
 ***
 
@@ -30,7 +89,7 @@ let c = factorial a
 
 *** 
 
-### Why F#
+### Why Should I Care?
 
 - Re-use all .net and .netcore framework and libraries. aspnet inlcuded (ALL)
 - ML family language synthax is broad and can be useful to understand and reason about many different languages
@@ -93,7 +152,7 @@ which means that the programmer doesn't have to write down (most) types, because
 
 ***
 
-#### More F#
+#### Units of Measure
 
 *)
 [<Measure>] type sqft
@@ -115,5 +174,17 @@ let pricePerSize = prices.[0]/sizes.[0]
 
 - rosetta code
 - fs-snip
+
+***
+
+### F# Leggends
+
+- Don Syme (creator)
+- Tomas Petricel (Type providers)
+- Alfonso Garcia Caro (Fable)
+- Scott Wlaschin (Domain Driven Design and F# expert)
+- Mark Seeman (also author of Dependency Injection in .NET)
+- Rachel Reese (ex-Jet CTO, 100% F# e-commerce company)
+- Alena Hall (microsoft cloud advocate)
 
 *)
