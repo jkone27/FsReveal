@@ -6,76 +6,89 @@
 - transition : default
 
 ***
-- data-background : ./images/wow-f-sharp.jpg
+
+- data-background : ./images/wowfsharp.jpg
 - data-background-repeat : repeat
 - data-background-size : 800px
-- body-color : blue
 
-<h1 id="first-slide-title">F#</h1>
+<div id="zoom">
+  <h1 id="first-slide-title">F#</h1>
+</div>
 
-slides done with:
-![FsReveal](https://fsprojects.github.io/FsReveal/formatting.html) (F# jsReveal)
-
-' my spearker notes
-
-***
-
-### F# Intro
-
-1. **What** is F# : open source functional first .net language
-2. **Why** learning F# among all functional first languages
-3. **language features** (similarities and differences with other langs)
-4. A simple console application using **FSharp.Data**, what is a type provider?
-
-<aside class="notes">
-my spearker notes
-</aside>
+slides done with
+[FsReveal](https://fsprojects.github.io/FsReveal/formatting.html) (F# JsReveal)
 
 ***
+- data-background : ./images/fsharplogo.png
+- data-background-size : 400px
 
-### F#
+### What will be talking about
 
-  - **let** - expression bindings (everything is a function)
-  - automatic type inference
-  - higher order functions (functions accepting functions as parameters) - HOF
-  - currying and partial application
-  - lists, arrays, sequences (IEnumerable)
-  - tuples : product types
-  - the **type** keyword (defining custom types)
-  - records (~ super-powered C# poco classes) : product types with names
-  - union types (discriminated union - or sum types)
-  - pattern matching over list, tuples, unions, records and so on
-
-***
-
-### What? (Wikipedia)
-
-* F# (pronounced F sharp) is a general purpose, strongly typed, multi-paradigm programming language that encompasses functional, 
-imperative, and object-oriented programming methods.
-
-<aside class="notes">
-is most often used as a cross-platform Common Language Infrastructure (CLI) language, 
-but it can also generate JavaScript and graphics processing unit (GPU) code.
-
-Is developed by the F# Software Foundation, Microsoft and open contributors. 
-An open source, cross-platform compiler for F# is available from the F# Software Foundation. 
-
-F# is also a fully supported language in Visual Studio and Xamarin Studio. 
-
-Other tools supporting F# development include Mono, MonoDevelop, SharpDevelop, MBrace, and WebSharper.
-
-Plug-ins supporting F# exist for many widely used editors, most notably the Ionide extension for Atom and Visual Studio Code, 
-and integrations for other editors such as Vim, Emacs, Sublime Text, and Rider.
-
-Is a member of the ML language family and originated as a .NET Framework implementation 
-of a core of the programming language OCaml. 
-
-It has also been influenced by C#, Python, Haskell, Scala, and Erlang.
-</aside>
+<section data-markdown>
+  <script type="text/template">
+    1. What is that? <!-- .element: class="fragment" data-fragment-index="0" -->
+    2. Why learning it <!-- .element: class="fragment" data-fragment-index="1" -->
+    3. Language features via examples <!-- .element: class="fragment" data-fragment-index="2" -->
+    4. Fsharp.Data = type providers <!-- .element: class="fragment" data-fragment-index="3" -->
+  </script>
+</section>
 
 ***
+- data-background : ./images/batman.jpg
+- data-background-size : 900px
+- data-background-repeat: repeat-x
 
-#### F# (with tooltips via FSharp.Formatting library)
+
+<div id="what-is-it">
+<section data=markdown>
+
+### Tell me more!
+* general purpose, **strongly typed**, **multi-paradigm** 
+* **cross-platform** (.NET/.netcore)
+* can also generate **JavaScript** and **GPU code**
+* makes it easy to write **correct** and **maintainable** code
+* expressions are **type-inferred and generalized automatically**
+* a data-rich experience with **type providers**
+* also a **scripting language**
+
+</br>
+</br>
+
+##### Sources
+* [microsoft](https://en.wikipedia.org/wiki/F_Sharp_(programming_language))
+* [wikipedia](https://docs.microsoft.com/en-us/dotnet/fsharp/what-is-fsharp)
+* [type providers](https://docs.microsoft.com/en-us/dotnet/fsharp/tutorials/fsharp-interactive/)
+* [scripting language](https://docs.microsoft.com/en-us/dotnet/fsharp/tutorials/type-providers/)
+
+</section>
+</div>
+
+<section>
+  <aside class="notes">
+  is most often used as a cross-platform Common Language Infrastructure (CLI) language, 
+  but it can also generate JavaScript and graphics processing unit (GPU) code.
+
+  Is developed by the F# Software Foundation, Microsoft and open contributors. 
+  An open source, cross-platform compiler for F# is available from the F# Software Foundation. 
+
+  F# is also a fully supported language in Visual Studio and Xamarin Studio. 
+
+  Other tools supporting F# development include Mono, MonoDevelop, SharpDevelop, MBrace, and WebSharper.
+
+  Plug-ins supporting F# exist for many widely used editors, most notably the Ionide extension for Atom and Visual Studio Code, 
+  and integrations for other editors such as Vim, Emacs, Sublime Text, and Rider.
+
+  Is a member of the ML language family and originated as a .NET Framework implementation 
+  of a core of the programming language OCaml. 
+
+  It has also been influenced by C#, Python, Haskell, Scala, and Erlang.
+  </aside>
+</section>
+
+***
+- data-background : ./images/underwater02.jpg
+
+#### example, declaring a Factorial function
 
 *)
 let a = 5
@@ -87,7 +100,112 @@ let c = factorial a
 (*** include-value: c ***)
 (**
 
+***
+- data-background : ./images/stackoverflow.png
+- data-background-repeat: repeat
+- data-background-size: 300px
+
+#### RECURSION
+
+*)
+let rec summ mylist acc =
+  match mylist with
+  |[] -> acc //the last operation performed is returning the value (tail recursion!)
+  |x::xs -> summ xs (acc + x)
+
+let result = summ [1;2;3;4;5] 0
+(** 
+`result` is evaluated for you
+*)
+(*** include-value: result ***)
+(**
+
+***
+- data-background : ./images/unclebob.jpg
+
+
+<div class="opaque">
+<section data=markdown>
+
+#### Classes in C#
+
+    [lang=csharp]
+    public class MyBaseClass
+    {
+        public MyBaseClass(int param1)
+        {
+            this.Param1 = param1;
+        }
+        public int Param1 { get; private set; }
+    }
+
+    public class MyDerivedClass: MyBaseClass
+    {
+        public MyDerivedClass(int param1, int param2): base(param1)
+        {
+            this.Param2 = param2;
+        }
+        public int Param2 { get; private set; }
+    }
+
+</div>
+</section>
+
 *** 
+- data-background: ./images/donsyme.png
+
+<div class="opaque">
+<section data=markdown>
+
+#### Classes in F#
+
+*)
+type BaseClass(param1) =
+   member this.Param1 = param1
+
+type DerivedClass(param1, param2) =
+   inherit BaseClass(param1)
+   member this.Param2 = param2
+
+// type is derived at first usage
+let derived = new DerivedClass(1,"hello")
+(** 
+`derived.Param2` is evaluated for you
+*)
+(*** include-value: derived.Param2 ***)
+
+//for POCOs we just use immutable records
+type Person = { Name : string }
+
+(**
+
+</div>
+</section>
+
+***
+- data-background : ./images/marsOrbiter.jpg
+- data-background-repeat : repeat
+- data-background-size : 300px
+
+#### Avoding Disasters (Unit of measures)
+
+*)
+[<Measure>] type sqft
+[<Measure>] type dollar
+let sizes = [|1700<sqft>;2100<sqft>;1900<sqft>;1300<sqft>|]
+let prices = [|53000<dollar>;44000<dollar>;59000<dollar>;82000<dollar>|] 
+let pricePerSize = prices.[0]/sizes.[0]
+(**
+
+#### `prices.[0]/sizes.[0]`
+
+*)
+(*** include-value: prices.[0]/sizes.[0] ***)
+(**
+
+* [6-unit-conversion-disasters](http://mentalfloss.com/article/25845/quick-6-six-unit-conversion-disasters)
+
+***
 
 ### Why Should I Care?
 
@@ -133,7 +251,7 @@ which means that the programmer doesn't have to write down (most) types, because
 
 ***
 
-### And Why Not Scala
+### And Scala?
 
     [lang=scala]
     Object Factorial {
@@ -152,31 +270,6 @@ which means that the programmer doesn't have to write down (most) types, because
 
 ***
 
-#### Units of Measure
-
-*)
-[<Measure>] type sqft
-[<Measure>] type dollar
-let sizes = [|1700<sqft>;2100<sqft>;1900<sqft>;1300<sqft>|]
-let prices = [|53000<dollar>;44000<dollar>;59000<dollar>;82000<dollar>|] 
-let pricePerSize = prices.[0]/sizes.[0]
-(**
-
-#### `prices.[0]/sizes.[0]`
-
-*)
-(*** include-value: prices.[0]/sizes.[0] ***)
-(**
-
-***
-
-### Sources
-
-- rosetta code
-- fs-snip
-
-***
-
 ### F# Leggends
 
 - Don Syme (creator)
@@ -186,5 +279,18 @@ let pricePerSize = prices.[0]/sizes.[0]
 - Mark Seeman (also author of Dependency Injection in .NET)
 - Rachel Reese (ex-Jet CTO, 100% F# e-commerce company)
 - Alena Hall (microsoft cloud advocate)
+
+***
+
+### Type Providers
+
+- FSharp.Data (XML, XSD, JSON, CSV)
+- Excel type provider
+- Swagger type provider
+- OpenApi type provider
+- SqlProvider
+- Froto.TypeProvider (protocol buffers)
+- HTML type provider
+- FileSystem type provider
 
 *)
