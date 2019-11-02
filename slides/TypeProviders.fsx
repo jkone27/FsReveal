@@ -53,7 +53,6 @@
 *)
 
 #r "../packages/FSharp.Data/lib/netstandard2.0/FSharp.Data.dll"
-#r "../packages/XPlot.GoogleCharts/lib/netstandard2.0/XPlot.GoogleCharts.dll"
 
 open FSharp.Data
 
@@ -94,6 +93,16 @@ printfn "%A" moviesFrom77
 
 (**
 
+### Type Providers
+
+- FSharp.Data (XML, XSD, JSON, CSV)
+- Excel type provider
+- Swagger type provider
+- OpenApi type provider
+- SqlProvider
+- Froto.TypeProvider (protocol buffers)
+- HTML type provider
+- FileSystem type provider
 
 ### Sources
 

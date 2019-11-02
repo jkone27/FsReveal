@@ -63,17 +63,222 @@ slides done with
 ***
 - data-background : ./images/underwater02.jpg
 
+## Foundamentals
+
+* Let
+* Default Types
+* Type aka Custom Types
+
+---
+
+### Let
+
+* binds an expression to a name (in scope)
+
+*)
+
+let x = 5
+let sum = (+)
+let mysum a b = a + b
+
+let myComplexSum a b =
+    let mySum x y = x + y + 42
+    mySum a b
+
+(**
+
+---
+
+### default types ADTs
+
+*)
+
+let tuple = (1,2,3,"hole",System.DateTime.Now)
+let lista = [1;2;3;4;5;6]
+let arr = [|1;2;3;4;5;6|]
+let enumerable = seq { 1 .. 5 }
+
+(**
+
+and some common operations (HOFs)
+
+*)
+
+let higherOrderFunctions = 
+    lista 
+    |> Seq.filter (fun x -> x > 2) //where
+    |> Seq.map (fun x -> x.ToString()) //select
+    |> Seq.reduce (+) //aggregate ~ foldl
+
+(**
+
+---
+
+### Type
+
+* define complex types 
+    * dynamic types: classes, interfaces
+    * structs, union types
+
+---
+
+*)
+
+type Person = { Name: string; Age: int}
+
+type ICustomer =
+    abstract member Name : string
+
+type AnonymousCustomer() =
+    interface ICustomer with
+        member this.Name = "Unknown"
+
+type Customer( name: string ) =
+    interface ICustomer with
+        member this.Name = name
+    override this.ToString() = sprintf "Customer: %s" name
+
+type VertebratedAnimal = 
+    | Mammal of string //union case constructor
+    | Reptile of string*string 
+    | Aphibian of System.DateTime
+    | Fish of int
+    | Bird of decimal
+
+(**
+
+---
+
+### A Brief Note from Category Theory
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="40%" width="40%" viewBox="0 0 100 100" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <style type="text/css">
+      path {
+        fill: transparent;
+        stroke: red;
+        stroke-width: 0.5;
+      }
+      path:hover {
+        fill: red;
+      }
+    </style>
+  </defs>
+  <path d="M 50 8 A 30 30 0 1 0 21 59 30 30 0 0 1 41 36 30 30 0 0 1 50 8" />
+  <path d="M 50 8 A 30 30 0 0 0 41 36 30 30 0 0 1 59 36 30 30 0 0 0 50 8" />
+  <path d="M 50 8 A 30 30 0 1 1 79 59 30 30 0 0 0 59 36 30 30 0 0 0 50 8" />
+  <path d="M 50 52 A 30 30 0 0 1 21 59 30 30 0 0 1 41 36 30 30 0 0 0 50 52" />
+  <path d="M 50 52 A 30 30 0 0 1 41 36 30 30 0 0 1 59 36 30 30 0 0 1 50 52" />
+  <path d="M 50 52 A 30 30 0 0 0 79 59 30 30 0 0 0 59 36 30 30 0 0 1 50 52" />
+  <path d="M 21 59 A 30 30 0 1 0 79 59 30 30 0 0 1 50 52 30 30 0 0 1 21 59" />
+</svg>
+
+* **Sum types (+)** : set sum (e.g. sql union)
+* **Product types (*)** set cartesian product (e.g. sql join)
+* All the types you know <mark> in any language </mark> are either one or the other!
+
+---
+
+### SUM (+) Types
+
+* an instance always has <mark> all of the included types </mark>
+
+*)
+
+//this is ALWAYS int * string
+let myTuple = (1,"hello")
+//always a Person (which is string * int)
+let johnPerson = { Name = "john"; Age = 13 }
+
+(**
+
+---
+
+### PRODUCT (*) Types
+
+* an instance can be <mark>any of the individual subtypes</mark>
+* for an abstract **class** or **interface**, inheritance provides **dynamic** subtyping
+* for a **union**, each "case" provides a **static** subtyping for the Union type
+
+*)
+
+//Classes:
+//each class inheriting from ICustomer is a subtype of this interface
+let johnCustomer = new Customer("john") :> ICustomer
+let mrNobody = new AnonymousCustomer() :> ICustomer
+
+//Unions:
+//each case is a constructor of a subtype
+let myBirdie = Bird(12.5m)
+let myFishy = Fish(35)
+
+(**
+
+***
+
+### Some more useful stuff
+
+* **namespace** - fsharp uses namespaces like C#
+* <mark>open</mark> is the using;import keyword
+* **module** : fsharp default component is a module == static class (under the hood)
+* F# anc C# projects can happily live together in the same solution, and be cross-referenced
+
+*)
+
+open System
+
+//namespace Test.Cool
+    //module MyModule =
+let CoolFunction =
+    printfn "hello from my module" //from C# using Test.Cool; MyModule.CoolFunction();
+            
+
+(** 
+
+---
+
+### Pattern Matching
+
+*)
+let patternMatchings =
+
+    //tuple deconstruction
+    let x,_ = (1,2) 
+    //list deconstruction
+    let z::zs = [1;2;3;4;5;6;7]
+    let [oneElementList] = [1]
+    let x::[] = [1]
+
+    //record deconstruction
+    let { Name = test } = { Name = "john"; Age = 21 }
+
+    let printHelloIfFish animal =
+        match animal with
+        |Fish(value) -> printfn "%i" value
+        |_ -> () //all other cases
+
+    ()
+(**
+
+***
+
 #### example, declaring a Factorial function
 
 *)
-let a = 5
+
 let factorial x = [1..x] |> List.reduce (*)
-let c = factorial a
+
+let c = factorial 5
 (** 
 `c` is evaluated for you
 *)
 (*** include-value: c ***)
 (**
+
+---
+- data-background : ./images/underwater01.jpg
+
+### [Try F#!](https://try.fsharp.org/)
 
 ***
 - data-background : ./images/stackoverflow.png
@@ -94,6 +299,22 @@ let result = summ [1;2;3;4;5] 0
 *)
 (*** include-value: result ***)
 (**
+
+---
+
+### Recursive Types
+  
+*)
+type MyNode = Leaf of string | Parent of MyNode
+
+let rec printAllLeafs mynode =
+    match mynode with
+    |Leaf(value) -> printfn "%s" value
+    |Parent(child) -> printAllLeafs child
+(**
+
+---
+- data-background : ./images/tailRecursive.png
 
 ***
 - data-background : ./images/turtleOpenMouth.jpg
@@ -236,41 +457,6 @@ let pricePerSize = price/size
 * [6-unit-conversion-disasters](http://mentalfloss.com/article/25845/quick-6-six-unit-conversion-disasters)
 
 ***
-- data-background : ./images/dolphins.jpg
-- data-background-repeat : repeat
-- data-background-size : 300px
-
-### Why Should I Care?
-
-- Re-use all .net and .netcore framework and libraries. aspnet inlcuded (ALL)
-- ML family language synthax is broad and can be useful to understand and reason about many different languages
-- Facebook reason comes from OCaml and also has an ML like synthax
-- Elm also is strongly inspired from ML synthax (and there is an F# impementation of elm architecture called Elmish)
-
-
-***
-
-- can transpile to JS with the awesome Fable.js (so it can be used as a full stack lang)
-- It's beautiful, elegant and simple
-- TypeProviders enable fast prototyping and "automatic integration testing" towards data sources
-- computation expressions provide an elegant way to write monads to be used in a simple way
-
-***
-
-- easilly interop with C# in the same solution
-- with Blazor fullstack .net development is possible thanks to webassembly
-- xamarin allows mobile app development with sharing of most common code
-- Visual Studio is great and has plenty of support for F#
-
-***
-
-- vscode works great on mac and linux and has amazing support for F# via ionide extension
-- it's open source and with a very active community
-- microsoft quantum lang is developed from F#
-- for data science and visualizations can be easy to shift from python, many libraries for ML, computervision and so on
-- strong type inference and domain modeling via ADT typesystem means less unit test to write since there is more compile time encoding
-
-***
 
 ### What about Haskell?
 
@@ -314,17 +500,6 @@ which means that the programmer doesn't have to write down (most) types, because
 - Alena Hall (microsoft cloud advocate)
 
 ***
-
-### Type Providers
-
-- FSharp.Data (XML, XSD, JSON, CSV)
-- Excel type provider
-- Swagger type provider
-- OpenApi type provider
-- SqlProvider
-- Froto.TypeProvider (protocol buffers)
-- HTML type provider
-- FileSystem type provider
 
 ##### Sources
 * [microsoft](https://en.wikipedia.org/wiki/F_Sharp_(programming_language))
