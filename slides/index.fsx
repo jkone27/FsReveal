@@ -61,6 +61,29 @@ slides done with
 - data-background-size: 500px
 
 ***
+
+***
+
+#### example, declaring a Factorial function
+
+*)
+
+let factorial x = [1..x] |> List.reduce (*)
+
+let c = factorial 5
+(** 
+`c` is evaluated for you
+*)
+(*** include-value: c ***)
+(**
+
+---
+- data-background : ./images/underwater01.jpg
+
+### [Try F#!](https://try.fsharp.org/)
+
+
+***
 - data-background : ./images/underwater02.jpg
 
 ## Foundamentals
@@ -261,26 +284,6 @@ let patternMatchings =
 (**
 
 ***
-
-#### example, declaring a Factorial function
-
-*)
-
-let factorial x = [1..x] |> List.reduce (*)
-
-let c = factorial 5
-(** 
-`c` is evaluated for you
-*)
-(*** include-value: c ***)
-(**
-
----
-- data-background : ./images/underwater01.jpg
-
-### [Try F#!](https://try.fsharp.org/)
-
-***
 - data-background : ./images/stackoverflow.png
 - data-background-repeat: repeat
 - data-background-size: 300px
@@ -368,7 +371,7 @@ type DerivedClass(param1, param2) =
    inherit BaseClass(param1)
    member this.Param2 = param2
 
-// type is derived at first usage
+// types are inferred at first usage
 let derived = new DerivedClass(1,"hello")
 (** 
 `derived.Param2` is evaluated for you
