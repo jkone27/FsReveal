@@ -6,10 +6,9 @@
 - transition : default
 
 ***
-
-- data-background : ./images/wowfsharp.jpg
-- data-background-repeat : repeat
-- data-background-size : 800px
+- data-background: ./images/wowfsharp.jpg
+- data-background-repeat: repeat
+- data-background-size: 800px
 
 <div id="zoom">
   <h1 id="first-slide-title">F#</h1>
@@ -19,71 +18,47 @@ slides done with
 [FsReveal](https://fsprojects.github.io/FsReveal/formatting.html) (F# JsReveal)
 
 ***
-- data-background : ./images/fsharplogo.png
-- data-background-size : 400px
+- data-background : ./images/seabed01.jpg
+- data-background-size : cover
+
+' is most often used as a cross-platform Common Language Infrastructure (CLI) language, 
+' but it can also generate JavaScript and graphics processing unit (GPU) code.
+' Is developed by the F# Software Foundation, Microsoft and open contributors. 
+' An open source, cross-platform compiler for F# is available from the F# Software Foundation.
+' F# is also a fully supported language in Visual Studio and Xamarin Studio.
+' Other tools supporting F# development include Mono, MonoDevelop, SharpDevelop, MBrace, and WebSharper.
+' Plug-ins supporting F# exist for many widely used editors, most notably the Ionide extension for Atom and Visual Studio Code, 
+' and integrations for other editors such as Vim, Emacs, Sublime Text, and Rider.
+' Is a member of the ML language family and originated as a .NET Framework implementation 
+' of a core of the programming language OCaml.
+' It has also been influenced by C#, Python, Haskell, Scala, and Erlang.
 
 ### What will be talking about
 
-<section data-markdown>
-  <script type="text/template">
-    1. What is that? <!-- .element: class="fragment" data-fragment-index="0" -->
-    2. Why learning it <!-- .element: class="fragment" data-fragment-index="1" -->
-    3. Language features via examples <!-- .element: class="fragment" data-fragment-index="2" -->
-    4. Fsharp.Data = type providers <!-- .element: class="fragment" data-fragment-index="3" -->
-  </script>
-</section>
+<iframe src="https://fsharp.org/" width="800" height="400"></iframe>
 
-***
-- data-background : ./images/batman.jpg
-- data-background-size : 900px
-- data-background-repeat: repeat-x
-
-
-<div id="what-is-it">
-<section data=markdown>
+---
 
 ### Tell me more!
+
+![cartesian-map](./images/languages-map.png)
+
+---
+
 * general purpose, **strongly typed**, **multi-paradigm** 
 * **cross-platform** (.NET/.netcore)
 * can also generate **JavaScript** and **GPU code**
+
+---
+
 * makes it easy to write **correct** and **maintainable** code
 * expressions are **type-inferred and generalized automatically**
 * a data-rich experience with **type providers**
 * also a **scripting language**
 
-</br>
-</br>
-
-##### Sources
-* [microsoft](https://en.wikipedia.org/wiki/F_Sharp_(programming_language))
-* [wikipedia](https://docs.microsoft.com/en-us/dotnet/fsharp/what-is-fsharp)
-* [type providers](https://docs.microsoft.com/en-us/dotnet/fsharp/tutorials/fsharp-interactive/)
-* [scripting language](https://docs.microsoft.com/en-us/dotnet/fsharp/tutorials/type-providers/)
-
-</section>
-</div>
-
-<section>
-  <aside class="notes">
-  is most often used as a cross-platform Common Language Infrastructure (CLI) language, 
-  but it can also generate JavaScript and graphics processing unit (GPU) code.
-
-  Is developed by the F# Software Foundation, Microsoft and open contributors. 
-  An open source, cross-platform compiler for F# is available from the F# Software Foundation. 
-
-  F# is also a fully supported language in Visual Studio and Xamarin Studio. 
-
-  Other tools supporting F# development include Mono, MonoDevelop, SharpDevelop, MBrace, and WebSharper.
-
-  Plug-ins supporting F# exist for many widely used editors, most notably the Ionide extension for Atom and Visual Studio Code, 
-  and integrations for other editors such as Vim, Emacs, Sublime Text, and Rider.
-
-  Is a member of the ML language family and originated as a .NET Framework implementation 
-  of a core of the programming language OCaml. 
-
-  It has also been influenced by C#, Python, Haskell, Scala, and Erlang.
-  </aside>
-</section>
+---
+- data-background : ./images/batman.jpg
+- data-background-size: 500px
 
 ***
 - data-background : ./images/underwater02.jpg
@@ -121,8 +96,13 @@ let result = summ [1;2;3;4;5] 0
 (**
 
 ***
-- data-background : ./images/unclebob.jpg
+- data-background : ./images/turtleOpenMouth.jpg
+- data-background-size : cover
 
+### Bored? Let's talk [Type Providers!](http://localhost:8083/TypeProviders.html#/)
+
+***
+- data-background : ./images/unclebob.jpg
 
 <div class="opaque">
 <section data=markdown>
@@ -151,7 +131,7 @@ let result = summ [1;2;3;4;5] 0
 </div>
 </section>
 
-*** 
+---
 - data-background: ./images/donsyme.png
 
 <div class="opaque">
@@ -174,9 +154,59 @@ let derived = new DerivedClass(1,"hello")
 *)
 (*** include-value: derived.Param2 ***)
 
-//for POCOs we just use immutable records
-type Person = { Name : string }
+(**
 
+</div>
+</section>
+
+***
+- data-background : ./images/unclebob.jpg
+
+<div class="opaque">
+<section data=markdown>
+
+#### Class with equality in C#
+
+    [lang=csharp]
+    public class Foo : IEquatable<Foo>{
+	    public int MyNum {get; set;}
+	    public string MyStr {get; set;}
+	    public DateTime Time {get; set;}
+
+	    public bool Equals(Foo other){
+	    	if(other == null) return false;
+	    	return MyNum == other.MyNum &&
+	    		Time == other.Time &&
+	    		string.Equals(MyStr, other.MyStr);
+	    }
+
+	    public override bool Equals(object obj){
+	    	if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+	    	return Equals(obj as Foo);
+	    }
+
+	    public override int GetHashCode(){
+	    	//...
+      }
+    }
+
+</div>
+</section>
+
+---
+- data-background: ./images/donsyme.png
+
+<div class="opaque">
+<section data=markdown>
+
+#### Class with equality in F# 
+
+not needed: Record! already implements standard equatable, plus is immutable by default
+
+*)
+type Foo = { MyNum: int; MyString : string; Time: System.DateTime }
 (**
 
 </div>
@@ -192,20 +222,23 @@ type Person = { Name : string }
 *)
 [<Measure>] type sqft
 [<Measure>] type dollar
-let sizes = [|1700<sqft>;2100<sqft>;1900<sqft>;1300<sqft>|]
-let prices = [|53000<dollar>;44000<dollar>;59000<dollar>;82000<dollar>|] 
-let pricePerSize = prices.[0]/sizes.[0]
+let size = 1700<sqft>
+let price = 53000<dollar>
+let pricePerSize = price/size
 (**
 
-#### `prices.[0]/sizes.[0]`
+#### `pricePerSize`
 
 *)
-(*** include-value: prices.[0]/sizes.[0] ***)
+(*** include-value: pricePerSize ***)
 (**
 
 * [6-unit-conversion-disasters](http://mentalfloss.com/article/25845/quick-6-six-unit-conversion-disasters)
 
 ***
+- data-background : ./images/dolphins.jpg
+- data-background-repeat : repeat
+- data-background-size : 300px
 
 ### Why Should I Care?
 
@@ -292,5 +325,11 @@ which means that the programmer doesn't have to write down (most) types, because
 - Froto.TypeProvider (protocol buffers)
 - HTML type provider
 - FileSystem type provider
+
+##### Sources
+* [microsoft](https://en.wikipedia.org/wiki/F_Sharp_(programming_language))
+* [wikipedia](https://docs.microsoft.com/en-us/dotnet/fsharp/what-is-fsharp)
+* [type providers](https://docs.microsoft.com/en-us/dotnet/fsharp/tutorials/fsharp-interactive/)
+* [scripting language](https://docs.microsoft.com/en-us/dotnet/fsharp/tutorials/type-providers/)
 
 *)

@@ -7,11 +7,6 @@
   animation-iteration-count: infinite;
 }
 
-#what-is-it {
-  text-shadow: 0 0 10px black;
-  padding: 10px;
-}
-
 #zoom {
   animation-name: zoom-in-out;
   animation-duration: 4s;
