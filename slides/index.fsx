@@ -5,6 +5,8 @@
 - theme : night
 - transition : default
 
+### The functional first .net special kid
+
 ***
 - data-background: ./images/wowfsharp.jpg
 - data-background-repeat: repeat
